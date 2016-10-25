@@ -1,5 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+
 # Combined with a little bit more Ruby, this makes it very easy to embed your
 # shell scripts directly within your Vagrantfile.
 # I understand that if you are not familiar with Ruby, the above may seem very
@@ -8,7 +9,11 @@
 #   contains a string which is then passed in as the inline script to the Vagrant configuration.
 # This script is used later and run always
 $script = <<SHELL
+   #echo "Installiere Cloud9. Bitte Warten"
+   #curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | sudo bash > /dev/null
+
    sudo /home/vagrant/cloud9/scripts/install-sdk.sh && \
+        sudo mv /root/.c9 /home/vagrant/ && \
         sudo chown -R vagrant:vagrant /home/vagrant/cloud9 /home/vagrant/.c9
    sudo su vagrant -c '/usr/local/lib/npm/bin/pm2 start \
         /home/vagrant/cloud9/server.js -- -p 8181 -l 0.0.0.0 -w /home/vagrant/www -a :'
@@ -32,7 +37,7 @@ Vagrant.configure("2") do |config|
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  config.vm.box_check_update = false
+  # config.vm.box_check_update = false
 
   # Falls vbguest-plugin bitte Guest nachladen
   if Vagrant.has_plugin?("vagrant-vbguest") then
@@ -90,6 +95,5 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-
   config.vm.provision "shell", inline: $script, run: "always"
 end
