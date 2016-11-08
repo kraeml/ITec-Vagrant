@@ -40,9 +40,15 @@ vagrant up
 ## URLs von ITec
 
 - <http://192.168.6.10> führt zu pma user root pw "Calvin and Hobs mit einfachen Jahrgang"
+
+  Alternativ: user: example_user password: Secure-CaHrdf
+
 - <http://192.168.6.10:8888> zu jupyter-lab
+
 - <http://192.168.6.10:8888/tree> jupyter-notebook
+
 - <http://192.168.6.10:8181> Cloud9 Ide
+
 - <http://192.168.6.10:1880> Node-Red
 - <http://192.168.6.10:3000> Port wird für Übungen zu nodejs verwendet.
 
